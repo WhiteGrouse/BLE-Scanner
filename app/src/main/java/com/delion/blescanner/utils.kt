@@ -4,6 +4,8 @@ import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import java.nio.ByteBuffer
+import java.util.*
 
 fun navigateTo(manager: FragmentManager, fragment: Fragment) {
     manager.beginTransaction()
@@ -25,4 +27,11 @@ fun appShutdown(activity: Activity, title: String?, message: String) {
         }
         .setCancelable(false)
         .show()
+}
+
+fun UUID.toByteArray(): ByteArray {
+    val buffer = ByteBuffer.wrap(ByteArray(16))
+    buffer.putLong(this.mostSignificantBits)
+    buffer.putLong(this.leastSignificantBits)
+    return buffer.array()
 }

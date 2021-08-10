@@ -1,13 +1,13 @@
 package com.delion.blescanner
 
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.le.BluetoothLeScanner
-import android.bluetooth.le.ScanCallback
-import android.bluetooth.le.ScanResult
-import android.bluetooth.le.ScanSettings
+import android.bluetooth.le.*
+import android.os.ParcelUuid
 import android.util.Log
+import java.nio.ByteBuffer
 
 class Scanner(val adapter: BluetoothAdapter) {
+    private val serviceUuid = ParcelUuid.fromString("9703e04c-991f-40e5-bff2-2234cc25788b")
     private var scanning = false
 
     private val _devices: MutableList<DeviceEntry> = ArrayList()
@@ -20,7 +20,8 @@ class Scanner(val adapter: BluetoothAdapter) {
             super.onScanResult(callbackType, result)
 
             if(result == null) return
-            val address = result.device.address
+            //val address = result.device.address
+            val address = ByteBuffer.wrap(result.scanRecord!!.serviceData[serviceUuid]!!).getShort().toString()
             var pos = devices.indexOfFirst { it.address == address }
             if(pos == -1) {
                 pos = _devices.size
@@ -71,7 +72,10 @@ class Scanner(val adapter: BluetoothAdapter) {
             .setMatchMode(ScanSettings.MATCH_MODE_STICKY)
             .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
             .build()
-        adapter.bluetoothLeScanner.startScan(emptyList(), scanSettings, scanCallback)
+        val filter = ScanFilter.Builder()
+            .setServiceData(serviceUuid, serviceUuid.uuid.toByteArray())
+            .build()
+        adapter.bluetoothLeScanner.startScan(listOf(filter), scanSettings, scanCallback)
         scanning = true
         Log.d("BLE Scanner", "Start scan")
     }
