@@ -1,13 +1,15 @@
-package com.delion.blescanner
+package com.delion.blescanner.view.fragment
 
 import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.*
+import com.delion.blescanner.view.MainActivity
+import com.delion.blescanner.R
+import com.delion.blescanner.appShutdown
 
 class RequestPermissionsFragment : Fragment() {
     private val launcher = registerForActivityResult(RequestMultiplePermissions()) { grantResults ->

@@ -1,4 +1,4 @@
-package com.delion.blescanner
+package com.delion.blescanner.view
 
 import android.bluetooth.BluetoothAdapter
 import android.content.BroadcastReceiver
@@ -7,8 +7,14 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
+import com.delion.blescanner.R
+import com.delion.blescanner.Scanner
+import com.delion.blescanner.navigateTo
+import com.delion.blescanner.view.fragment.DisabledFragment
+import com.delion.blescanner.view.fragment.RequestPermissionsFragment
+import com.delion.blescanner.view.fragment.ResultsFragment
+import com.delion.blescanner.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 

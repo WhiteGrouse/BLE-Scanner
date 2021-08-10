@@ -1,13 +1,12 @@
-package com.delion.blescanner
+package com.delion.blescanner.view.fragment
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.os.SystemClock
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
+import com.delion.blescanner.DeviceEntry
 
 import com.delion.blescanner.databinding.FragmentResultsItemBinding
 
