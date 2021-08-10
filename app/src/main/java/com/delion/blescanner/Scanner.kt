@@ -73,7 +73,7 @@ class Scanner(val adapter: BluetoothAdapter) {
             .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
             .build()
         val filter = ScanFilter.Builder()
-            .setServiceData(serviceUuid, serviceUuid.uuid.toByteArray())
+            .setServiceData(serviceUuid, ByteArray(0))
             .build()
         adapter.bluetoothLeScanner.startScan(listOf(filter), scanSettings, scanCallback)
         scanning = true
